@@ -2,62 +2,35 @@ import {
     API_KEY,
     CURRENT_WEATHER_URI,
     CITY_URI,
-    DAILY_FORECASTS
+    DAILY_FORECASTS_URI
 } from "../shared/accWeatherApi";
 
 import {
     GET_CURRENT_LOCATION,
     INPUT_TEXT,
     DEFAULT_LOAD_WEATHER,
-    AUTO_COMPLETE
+    AUTO_COMPLETE,
+    DAILY_FORECASTS
 } from "./types";
 
 export function getCurrentLocation() {
-    // const location = {};
-    // if (!navigator.geolocation) {
-    //     // setStatus("Geolocation is'nt support in your browser");
-    //     console.log("Geolocation is'nt support in your browser");
-    // } else {
-    //     // setStatus("Locating...");
-    //     navigator.geolocation.getCurrentPosition((position) => {
-    //         // setStatus(null);
-    //         //setLat(position.coords.latitude);
-    //         // setLng(position.coords.longitude);
-    //         location.latitude = position.coords.latitude;
-    //         location.longitude = position.coords.longitude;
+    const location = {};
+    if (!navigator.geolocation) {
+        console.log("Geolocation is'nt support in your browser");
+    } else {
+        navigator.geolocation.getCurrentPosition((position) => {
 
-    //         // }, () => {
-    //         // setStatus("Unable to retrieve your location");
-    //     })
-    // }
+            location.latitude = position.coords.latitude;
+            location.longitude = position.coords.longitude;
 
-    // return {
-    //     type: GET_CURRENT_LOCATION,
-    //     location: location
-    // }
-
-    return dispatch => {
-        const location = {};
-        if (!navigator.geolocation) {
-            // setStatus("Geolocation is'nt support in your browser");
-            console.log("Geolocation is'nt support in your browser");
-        } else {
-            // setStatus("Locating...");
-            navigator.geolocation.getCurrentPosition((position) => {
-                // setStatus(null);
-                //setLat(position.coords.latitude);
-                // setLng(position.coords.longitude);
-                location.latitude = position.coords.latitude;
-                location.longitude = position.coords.longitude;
-                // }, () => {
-                // setStatus("Unable to retrieve your location");
-            })
-        }
-        dispatch({
-            type: GET_CURRENT_LOCATION,
-            location: location
-        });
+        })
     }
+
+    return {
+        type: GET_CURRENT_LOCATION,
+        location: location
+    }
+
 }
 
 export function inputText(text) {
@@ -83,7 +56,7 @@ export function defaultLoadWeathr(cityKey = "215854") {
         }
     }
 }
-//http://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=RpjLxwm2JADKkxkRyRIfKqqAVQcIA99a&q=tel aviv
+
 export function autoComplete(city) {
     return async dispatch => {
         try {
@@ -100,3 +73,18 @@ export function autoComplete(city) {
     }
 }
 
+export function dailyForecasts(cityKey = "215854") {
+    return async dispatch => {
+        try {
+            const response = await fetch(DAILY_FORECASTS_URI + cityKey + "?apikey" + API_KEY);
+            const jsonData = await response.json();
+            dispatch({
+                type: DAILY_FORECASTS,
+                data: jsonData
+            })
+        } catch (err) {
+            console.log("error in loading data >> ", err.type);
+        }
+
+    }
+}

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { defaultLoadWeathr } from '../../redux/actions'
+import { defaultLoadWeathr } from '../../redux/actions';
+import { FaExchangeAlt } from  'react-icons/fa';
 import './MainCardComponent.css'
 
 function MainCardComponent({ city }) {
+
 
     const [unit, setUnit] = useState("celsius");
 
@@ -53,7 +55,7 @@ function MainCardComponent({ city }) {
                     <Col>
                         <div className="favorites-container">
                             <div className="btn-favorites"><h5>♥ save</h5></div>
-                            <div className="btn-favorites" onClick={changeTemperatureUnit}><h5>C &#11150;&#11148; F</h5></div>
+                            <div className="btn-favorites" onClick={changeTemperatureUnit}><h5>C <FaExchangeAlt/> F</h5></div>
                         </div>
                     </Col>
                 </Row>
