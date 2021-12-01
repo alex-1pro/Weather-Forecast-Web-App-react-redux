@@ -1,0 +1,64 @@
+div.c-main-card{
+   
+    /* border: solid; */
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+div.c-main-card div.weather-container{
+    display: flex;
+      
+}
+
+div.container-weather-img{
+    height: 100px;
+    /* margin-top: 20px; */
+}
+div.c-main-card img.weather-img{
+    height:100%;
+} 
+div.c-main-card div.weather-city h1{ 
+    font-size: 1em;
+}
+
+div.c-main-card div.favorites-container{
+    display: flex;
+    justify-content: end;
+}
+
+div.c-main-card div.favorites-container > div.btn-favorites {
+    border-radius:23px;
+    border: #F5F5F5;
+    height: 40px;
+    background-color: #F05514;
+    padding:10px;
+    cursor: pointer;
+    margin:5px;
+    width: 100px;
+}
+
+div.c-main-card div.favorites-container > div.btn-favorites:hover {
+    background-color: #8f90aa;
+    
+}
+
+div.c-main-card h1.weather-temperature {
+    font-size: 5.25em;
+    font-weight: 300;
+    
+}
+
+div.c-main-card h1.weather-text {
+    font-size: 1.5em;
+    font-weight: 300
+}
+
+h1.current-date{
+    font-size: 1.5em;
+    font-weight: 300;
+}
+
+div.btn-favorites > h5 {
+    text-align: center;
+}

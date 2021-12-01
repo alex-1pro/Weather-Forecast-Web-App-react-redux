@@ -1,0 +1,40 @@
+div.p-home{
+    border:solid;
+    padding: 20px;
+    background: linear-gradient(to bottom, rgb(43,50,178) 0%, rgb(20,136,204) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+}
+
+div.p-home div.location-btn{
+    cursor: pointer;
+    display: inline;
+}
+
+div.p-home div.frame-input{
+    border-radius:23px;
+    border: #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5;
+    margin:10px;
+}
+
+div.p-home input.search-input{
+    border-radius:23px;
+    border: #F5F5F5;
+    height: 45px;
+    background-color: #F5F5F5;
+    color:#707070 ;
+    font-size:20px; 
+    padding:9.9px 26px 9.1px 26px;
+}
+
+div.p-home input.search-input::placeholder{
+    color:#707070 ;
+    opacity: 0.8; 
+}
+
+div.p-home input.search-input:focus {
+    outline: none;
+}
