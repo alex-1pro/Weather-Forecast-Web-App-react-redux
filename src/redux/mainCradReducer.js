@@ -1,8 +1,10 @@
-import { DEFAULT_LOAD_WEATHER, DAILY_FORECASTS } from "./types";
+import { DEFAULT_LOAD_WEATHER, DAILY_FORECASTS, CHANGE_UNIT_DEGREES, CURRENT_WEATHER_FROM_FAVORITES } from "./types";
+import uniqid from 'uniqid';
 
 const intialState = {
     weather: [],
-    weatherDaily: []
+    weatherDaily: [],
+    unitDegrees:"C"
 }
 
 export const mainCardReducer = (state = intialState, action) => {
@@ -42,12 +44,13 @@ export const mainCardReducer = (state = intialState, action) => {
                 return {
                     weatherDay: res.Day,
                     weatherNight: res.Night,
-                    weatherIconDay: res.WeatherIcon,
+                    // weatherIconDay: res.WeatherIcon,
                     celsiusMin: celMinValue,
                     celsiusMax: celMaxValue,
                     fahrenheitMin: fahMinValue,
                     fahrenheitMax: fahMaxValue,
                     date: res.Date,
+                    dayId:uniqid()
 
                 }
             })
@@ -56,6 +59,17 @@ export const mainCardReducer = (state = intialState, action) => {
                 weatherDaily:newDailyForecasts
             }
 
+        case CHANGE_UNIT_DEGREES:
+                return {
+                    ...state,
+                    unitDegrees:action.unit
+                }
+        case CURRENT_WEATHER_FROM_FAVORITES:
+            return {
+                ...state,
+                weatherDaily:action.data.weatherDaily,
+                weather:action.data.currentWeather
+            }
         default:
             return state;
     }
@@ -69,3 +83,4 @@ function fToC(fahrenheit) {
     const celsius = (fahrenheit - 32) * 5 / 9;
     return round(celsius);
 }
+

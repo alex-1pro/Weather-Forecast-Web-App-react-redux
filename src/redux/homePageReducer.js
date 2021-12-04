@@ -1,4 +1,4 @@
-import { GET_CURRENT_LOCATION, INPUT_TEXT, AUTO_COMPLETE } from "./types";
+import { GET_CURRENT_LOCATION, UPDATE_CITY_NAME, AUTO_COMPLETE } from "./types";
 
 const intialState = {
     location: {
@@ -14,10 +14,12 @@ export const homePageReducer = (state = intialState, action) => {
 
     switch (action.type) {
         // case GET_CURRENT_LOCATION:
-        case INPUT_TEXT:
+        case UPDATE_CITY_NAME:
             return {
                 ...state,
-                text: action.text
+                text: action.data.city,
+                // cityKey:action.data.cityKey
+
             }
         case GET_CURRENT_LOCATION:
 

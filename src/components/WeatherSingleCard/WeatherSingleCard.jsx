@@ -1,22 +1,60 @@
-import React from 'react';
-import { Card, Button } from 'react-bootstrap';
 
-function WeatherSingleCard(props) {
+import { useEffect, useState } from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import './WeatherSingleCard.css';
+
+
+function WeatherSingleCard({ weather,unitDegrees }) {
+    const { weatherDay,
+        weatherNight,
+        celsiusMin,
+        celsiusMax,
+        fahrenheitMin, 
+        fahrenheitMax,
+        date } = weather;
+
+   
+
+    const [isDay, setIsDay] = useState("weatherDay");
+
+    useEffect(() => {
+        const date = new Date();
+        if (date.getHours() >= 17){
+            setIsDay("weatherNight");
+        }
+
+    }, []);
+
+    const icon = () => {
+        const accuWeatherIcons = "https://developer.accuweather.com/sites/default/files/"
+            const iconId = Number(weather[isDay].Icon) < 10 ? `0${weather[isDay].Icon}` : weather[isDay].Icon;
+            return `${accuWeatherIcons}${iconId}-s.png`;
+    }
+    
+    const getDate = () => {
+        const day = new Date(date);
+        return day.toDateString();
+    }
+    
+    const temperature  = () =>  unitDegrees === "C"?<h1> {celsiusMin}&deg;C~{celsiusMax}&deg;C</h1> : <h1> {fahrenheitMin}&deg;F~{fahrenheitMax}&deg;F</h1>  
+    
     return (
-        <div>
-            <Card className="text-center">
-                <Card.Header>Featured</Card.Header>
-                <Card.Body>
-                    <Card.Title>Special title treatment</Card.Title>
-                    <Card.Img variant="top" src="https://i.pinimg.com/474x/24/a6/3a/24a63abe3d7b0b34ae34b22781a7972c.jpg/100px180" />
-                    {/* <Card.Text>
-                        With supporting text below as a natural lead-in to additional content.
-                    </Card.Text>
-                    <Button variant="primary">Go somewhere</Button> */}
-                </Card.Body>
-                {/* <Card.Footer className="text-muted">2 days ago</Card.Footer> */}
-            </Card>
-        </div>
+            <Container fluid className="c-weather-single-card back-ground-color">
+                <Row >
+                    <Col >
+                        <div className="single-day-container">
+                            <h1>
+                            {getDate()}
+                            </h1>
+                             <div className="container-weather-img">
+                                <img className="single-weather-img" src={icon()} />
+                          </div> 
+                            {temperature()}
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+       
     );
 }
 

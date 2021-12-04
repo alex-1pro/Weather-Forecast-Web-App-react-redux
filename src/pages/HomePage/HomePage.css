@@ -38,3 +38,11 @@ div.p-home input.search-input::placeholder{
 div.p-home input.search-input:focus {
     outline: none;
 }
+
+.back-ground-color{
+    background-color: rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 100%;
+}

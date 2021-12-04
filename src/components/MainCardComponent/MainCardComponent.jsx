@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Container, Row, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { defaultLoadWeathr } from '../../redux/actions';
+import { defaultLoadWeathr, changeUnitDegrees, addToFavorites } from '../../redux/actions';
 import { FaExchangeAlt } from  'react-icons/fa';
 import './MainCardComponent.css'
+import { mainCardReducer } from '../../redux/mainCradReducer';
 
 function MainCardComponent({ city }) {
 
@@ -18,6 +19,11 @@ function MainCardComponent({ city }) {
         const { homePageReducer } = state;
         return homePageReducer;
     })
+    const dailyWeather = useSelector(state => {
+        const { mainCardReducer } = state;
+        return mainCardReducer.weatherDaily;
+    });
+ 
 
     const dispatch = useDispatch();
 
@@ -30,17 +36,27 @@ function MainCardComponent({ city }) {
         return `https://developer.accuweather.com/sites/default/files/${iconId}-s.png`
     }
     const getDate = () => {
-        const date = new Date(weather[0].date.replace(/\T.*/, ""));
+        // const date = new Date(weather[0].date.replace(/\T.*/, ""));
+        const date = new Date(weather[0].date);
         return date.toDateString();
     }
 
     const changeTemperatureUnit = () => {
         if (unit === "celsius") {
             setUnit("fahrenheit");
+            dispatch(changeUnitDegrees("F"));
         }
         else {
             setUnit("celsius");
+            dispatch(changeUnitDegrees("C"));
         }
+    }
+
+    //addToFavorites(city, currentWeather, dailyWeather)
+
+    const onSave = () =>{
+        console.log("onSave");
+        dispatch(addToFavorites(cityData.text,cityData.cityKey ,weather , dailyWeather) );
     }
 
     return (
@@ -54,7 +70,7 @@ function MainCardComponent({ city }) {
                     </Col>
                     <Col>
                         <div className="favorites-container">
-                            <div className="btn-favorites"><h5>♥ save</h5></div>
+                            <div className="btn-favorites" onClick={onSave}><h5>♥ save</h5></div>
                             <div className="btn-favorites" onClick={changeTemperatureUnit}><h5>C <FaExchangeAlt/> F</h5></div>
                         </div>
                     </Col>

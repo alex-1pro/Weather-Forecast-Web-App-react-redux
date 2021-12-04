@@ -7,11 +7,16 @@ import {
 
 import {
     GET_CURRENT_LOCATION,
-    INPUT_TEXT,
+    UPDATE_CITY_NAME,
     DEFAULT_LOAD_WEATHER,
     AUTO_COMPLETE,
-    DAILY_FORECASTS
+    DAILY_FORECASTS,
+    CHANGE_UNIT_DEGREES,
+    ADD_TO_FAVORITES,
+    CURRENT_WEATHER_FROM_FAVORITES
 } from "./types";
+
+
 
 export function getCurrentLocation() {
     const location = {};
@@ -33,12 +38,7 @@ export function getCurrentLocation() {
 
 }
 
-export function inputText(text) {
-    return {
-        type: INPUT_TEXT,
-        text
-    }
-}
+
 
 
 export function defaultLoadWeathr(cityKey = "215854") {
@@ -76,8 +76,9 @@ export function autoComplete(city) {
 export function dailyForecasts(cityKey = "215854") {
     return async dispatch => {
         try {
-            const response = await fetch(DAILY_FORECASTS_URI + cityKey + "?apikey" + API_KEY);
+            const response = await fetch(DAILY_FORECASTS_URI + cityKey + "?apikey=" + API_KEY);
             const jsonData = await response.json();
+
             dispatch({
                 type: DAILY_FORECASTS,
                 data: jsonData
@@ -85,6 +86,47 @@ export function dailyForecasts(cityKey = "215854") {
         } catch (err) {
             console.log("error in loading data >> ", err.type);
         }
+    }
+}
+
+export function changeUnitDegrees(unit) {
+    return {
+        type: CHANGE_UNIT_DEGREES,
+        unit: unit
+    }
+}
+
+export function addToFavorites(city, cityKey, currentWeather, dailyWeather) {
+    return {
+        type: ADD_TO_FAVORITES,
+        data: {
+            city,
+            cityKey,
+            currentWeather,
+            dailyWeather
+        }
+    }
+}
+
+// CURRENT_WEATHER_FROM_FAVORITES
+export function weatherFromFavorites(city, cityKey, currentWeather, dailyWeather) {
+    return dispatch => {
+        dispatch({
+            type: UPDATE_CITY_NAME,
+            data: {
+                city,
+                cityKey
+            }
+        });
+        dispatch({
+            type: CURRENT_WEATHER_FROM_FAVORITES,
+            data: {
+                currentWeather,
+                dailyWeather
+            }
+        });
 
     }
 }
+
+

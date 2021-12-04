@@ -1,0 +1,24 @@
+div.c-weather-single div.single-day-container{
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+
+}
+
+div.single-day-container h1{
+        text-align: center;
+        font-size: 1.5em;
+        font-weight: 30;    
+}
+
+div.single-day-container div.container-weather-img{
+    /* width: 10px; */
+}
+
+
+div.container-weather-img img.single-weather-img{
+    height:100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+} 
