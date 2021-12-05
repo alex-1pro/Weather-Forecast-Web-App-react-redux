@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Alexey-Belogurov-24-11-2021/static/css/main.97f2ecf5.chunk.css",
-    "main.js": "/Alexey-Belogurov-24-11-2021/static/js/main.f587eba0.chunk.js",
-    "main.js.map": "/Alexey-Belogurov-24-11-2021/static/js/main.f587eba0.chunk.js.map",
-    "runtime-main.js": "/Alexey-Belogurov-24-11-2021/static/js/runtime-main.9e636e2f.js",
-    "runtime-main.js.map": "/Alexey-Belogurov-24-11-2021/static/js/runtime-main.9e636e2f.js.map",
+    "main.css": "/Alexey-Belogurov-24-11-2021/static/css/main.c2fcaf42.chunk.css",
+    "main.js": "/Alexey-Belogurov-24-11-2021/static/js/main.54db8be3.chunk.js",
+    "main.js.map": "/Alexey-Belogurov-24-11-2021/static/js/main.54db8be3.chunk.js.map",
+    "runtime-main.js": "/Alexey-Belogurov-24-11-2021/static/js/runtime-main.853f47de.js",
+    "runtime-main.js.map": "/Alexey-Belogurov-24-11-2021/static/js/runtime-main.853f47de.js.map",
     "static/css/2.383c0125.chunk.css": "/Alexey-Belogurov-24-11-2021/static/css/2.383c0125.chunk.css",
-    "static/js/2.2f27442f.chunk.js": "/Alexey-Belogurov-24-11-2021/static/js/2.2f27442f.chunk.js",
-    "static/js/2.2f27442f.chunk.js.map": "/Alexey-Belogurov-24-11-2021/static/js/2.2f27442f.chunk.js.map",
-    "static/js/3.34b16558.chunk.js": "/Alexey-Belogurov-24-11-2021/static/js/3.34b16558.chunk.js",
-    "static/js/3.34b16558.chunk.js.map": "/Alexey-Belogurov-24-11-2021/static/js/3.34b16558.chunk.js.map",
+    "static/js/2.86e31e60.chunk.js": "/Alexey-Belogurov-24-11-2021/static/js/2.86e31e60.chunk.js",
+    "static/js/2.86e31e60.chunk.js.map": "/Alexey-Belogurov-24-11-2021/static/js/2.86e31e60.chunk.js.map",
+    "static/js/3.2b870b02.chunk.js": "/Alexey-Belogurov-24-11-2021/static/js/3.2b870b02.chunk.js",
+    "static/js/3.2b870b02.chunk.js.map": "/Alexey-Belogurov-24-11-2021/static/js/3.2b870b02.chunk.js.map",
     "index.html": "/Alexey-Belogurov-24-11-2021/index.html",
     "static/css/2.383c0125.chunk.css.map": "/Alexey-Belogurov-24-11-2021/static/css/2.383c0125.chunk.css.map",
-    "static/css/main.97f2ecf5.chunk.css.map": "/Alexey-Belogurov-24-11-2021/static/css/main.97f2ecf5.chunk.css.map",
-    "static/js/2.2f27442f.chunk.js.LICENSE.txt": "/Alexey-Belogurov-24-11-2021/static/js/2.2f27442f.chunk.js.LICENSE.txt"
+    "static/css/main.c2fcaf42.chunk.css.map": "/Alexey-Belogurov-24-11-2021/static/css/main.c2fcaf42.chunk.css.map",
+    "static/js/2.86e31e60.chunk.js.LICENSE.txt": "/Alexey-Belogurov-24-11-2021/static/js/2.86e31e60.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9e636e2f.js",
+    "static/js/runtime-main.853f47de.js",
     "static/css/2.383c0125.chunk.css",
-    "static/js/2.2f27442f.chunk.js",
-    "static/css/main.97f2ecf5.chunk.css",
-    "static/js/main.f587eba0.chunk.js"
+    "static/js/2.86e31e60.chunk.js",
+    "static/css/main.c2fcaf42.chunk.css",
+    "static/js/main.54db8be3.chunk.js"
   ]
 }
