@@ -8,7 +8,6 @@ const intialState = {
 }
 
 export const mainCardReducer = (state = intialState, action) => {
-    console.log("mainCard Reducer > ", action);
     switch (action.type) {
 
         case DEFAULT_LOAD_WEATHER:

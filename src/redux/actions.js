@@ -14,7 +14,9 @@ import {
     DAILY_FORECASTS,
     CHANGE_UNIT_DEGREES,
     ADD_TO_FAVORITES,
-    CURRENT_WEATHER_FROM_FAVORITES
+    CURRENT_WEATHER_FROM_FAVORITES,
+    ERROR_DISPALY_ON,
+    ERROR_DISPALY_OFF
 } from "./types";
 
 
@@ -46,28 +48,7 @@ export function  currentGeopostion() {
 
 }
 
-//http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=yIS7IdPp0gk2fQ4NU5fRmpEjBZoJvzKR&q=32.085300%2C34.781769&toplevel=true
 
-// export function currentGeopostion() {
-//     const location = {
-//         latitude: 0,
-//         longitude: 0
-//     };
-//     if (!navigator.geolocation) {
-//         console.log("Geolocation is'nt support in your browser");
-//     } else {
-//         navigator.geolocation.getCurrentPosition((position) => {
-//             location.latitude = position.coords.latitude;
-//             location.longitude = position.coords.longitude;
-//         })
-//         console.log("location is >>>>", location);
-//     }
-//     return dispatch => {
-//         console.log("location is >>>>", location);
-//         dispatch(getCurrentLocation(location.latitude, location.longitude));
-//     }
-
-//}
 
 function getCurrentLocation(latitude, longitude) {
 
@@ -77,7 +58,6 @@ function getCurrentLocation(latitude, longitude) {
         try {
             const response = await fetch(CURRENT_LOCATION_GEOPOSITION_URI +
                 "?apikey=" + API_KEY + "&q=" + latitude + "C" + longitude + "&toplevel=true");
-            // const response = await fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=yIS7IdPp0gk2fQ4NU5fRmpEjBZoJvzKR&q=32.085300%2C34.781769&toplevel=true")
             const jsonData = await response.json();
             dispatch({
                 type: GET_CURRENT_LOCATION,
@@ -85,7 +65,8 @@ function getCurrentLocation(latitude, longitude) {
             })
 
         } catch (err) {
-            console.log("error in loading data >> ", err.type);
+            // console.log("error in loading data >> ", err.type);
+            dispatch(errorOn("error API"));
         }
     }
 
@@ -98,13 +79,13 @@ export function defaultLoadWeathr(cityKey = "215854") {
         try {
             const response = await fetch(CURRENT_WEATHER_URI + cityKey + "?apikey=" + API_KEY);
             const jsonData = await response.json();
-            console.log("defaultLoadWeathr>>");
             dispatch({
                 type: DEFAULT_LOAD_WEATHER,
                 data: jsonData
             })
         } catch (err) {
-            console.log("error in loading data >> ", err.type);
+            // console.log("error in loading data >> ", err.type);
+            dispatch(errorOn("error API"));
         }
     }
 }
@@ -120,7 +101,8 @@ export function autoComplete(city) {
             })
 
         } catch (err) {
-            console.log("error in loading data >> ", err.type);
+            // console.log("error in loading data >> ", err.type);
+            dispatch(errorOn("error API"));
         }
     }
 }
@@ -136,7 +118,8 @@ export function dailyForecasts(cityKey = "215854") {
                 data: jsonData
             })
         } catch (err) {
-            console.log("error in loading data >> ", err.type);
+            // console.log("error in loading data >> ", err.type);
+            dispatch(errorOn("error API"));
         }
     }
 }
@@ -182,3 +165,22 @@ export function weatherFromFavorites(city, cityKey, currentWeather, dailyWeather
 }
 
 
+export function errorOn(text) {
+    
+    return dispatch => {
+        dispatch({
+            type: ERROR_DISPALY_ON,
+            text
+        });
+        setTimeout(()=>{
+            dispatch(errorOff());
+        },2000)
+    }
+}
+
+export function errorOff() {
+    return {
+        type: ERROR_DISPALY_OFF
+
+    }
+}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultLoadWeathr, changeUnitDegrees, addToFavorites } from '../../redux/actions';
 import { FaExchangeAlt } from  'react-icons/fa';
@@ -52,10 +52,9 @@ function MainCardComponent({ city }) {
         }
     }
 
-    //addToFavorites(city, currentWeather, dailyWeather)
 
     const onSave = () =>{
-        console.log("onSave");
+       
         dispatch(addToFavorites(cityData.text,cityData.cityKey ,weather , dailyWeather) );
     }
 

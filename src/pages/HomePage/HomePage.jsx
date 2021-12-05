@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Row, Toast } from 'react-bootstrap';
 import './HomePage.css'
 import { GoLocation } from 'react-icons/go'
 import MainCardComponent from '../../components/MainCardComponent/MainCardComponent';
 import WeatherSingleCard from '../../components/WeatherSingleCard/WeatherSingleCard';
-import {  currentGeopostion, autoComplete, dailyForecasts } from '../../redux/actions';
+import { currentGeopostion, autoComplete, dailyForecasts } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -17,19 +17,13 @@ function HomePage(props) {
 
     const dispatch = useDispatch();
     const city = useSelector(state => {
-        // console.log("state >>>>", state);
+
         const { homePageReducer } = state;
         return homePageReducer;
     });
 
 
-    
-    // console.log("currentLocation>>>>>", currentLocation);
 
-    // const {dailyWeather} = useSelector(state => {
-    //     const { mainCardReducer } = state;
-    //     return mainCardReducer.weatherDaily;
-    // })
 
 
     const weatherDaily = useSelector(state => {
@@ -40,11 +34,8 @@ function HomePage(props) {
         const { mainCardReducer } = state;
         return mainCardReducer.unitDegrees;
     })
-    console.log("unit degrees >>>>", unitDegrees);
 
-    // const weatherPerDay = dailyWeather.map(day => {
-    //     return <Col> <WeatherSingleCard weather={day} /></Col>
-    // });
+
 
     const handleGetLocation = () => {
         dispatch(currentGeopostion());
@@ -52,8 +43,6 @@ function HomePage(props) {
 
 
     const handleChange = (e) => {
-        // console.log("handle text >>", e.target.value);
-        // dispatch(inputText(e.target.value));
         setTextCity(e.target.value);
     }
 
@@ -62,7 +51,6 @@ function HomePage(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispatch(inputText(textCity));
         dispatch(autoComplete(textCity))
         setTextCity("");
     }
@@ -71,10 +59,24 @@ function HomePage(props) {
         dispatch(dailyForecasts(city.cityKey))
     }, [city.cityKey])
 
+    const error = useSelector(state => state.appReducer.error);
+    console.log("error ", error);
+
+    const errorToast = <Toast className="d-inline-block m-1" bg="danger" >
+        {/* <Toast.Header>
+            <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+            <strong className="me-auto">Error</strong>
+        </Toast.Header> */}
+        <Toast.Body >
+            {error}
+        </Toast.Body>
+    </Toast>
+
+
     return (
         <div className="p-home">
+            {!!error && errorToast}
             <Container fluid>
-            {/* <Row className="justify-content-center" > */}
                 <Row className="justify-content-center" >
                     <Col md="auto">
                         <form onSubmit={handleSubmit}>
@@ -82,13 +84,10 @@ function HomePage(props) {
                                 <input className="search-input" type="text" placeholder="The city name" onChange={handleChange} value={textCity} />
 
                             </div>
-                            {/* <h1>{`latitude = ${currentLocation.latitude} longitude = ${currentLocation.longitude}`}</h1> */}
                             <input type="submit" hidden />
                         </form>
                     </Col>
-                    {/* <Col md="auto">
-                        <div className="location-btn"><GoLocation color="#F05514" onClick={handleGetLocation} /></div>
-                    </Col> */}
+
                 </Row>
                 <Row >
                     <MainCardComponent city={city.text} />

@@ -10,7 +10,6 @@ const intialState = {
 }
 
 export const homePageReducer = (state = intialState, action) => {
-    console.log("input homePageReducer", action);
 
     switch (action.type) {
 

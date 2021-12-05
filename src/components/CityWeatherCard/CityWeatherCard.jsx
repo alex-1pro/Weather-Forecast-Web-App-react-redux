@@ -16,7 +16,7 @@ function CityWeatherCard({ cityData }) {
           }
    */
 
-    //weatherFromFavorites(city, cityKey, currentWeather, dailyWeather)
+   
     const dispatch = useDispatch();
     const { currentWeather, dailyWeather, city, cityKey } = cityData;
     const history = useHistory();
