@@ -2,7 +2,8 @@ import {
     API_KEY,
     CURRENT_WEATHER_URI,
     CITY_URI,
-    DAILY_FORECASTS_URI
+    DAILY_FORECASTS_URI,
+    CURRENT_LOCATION_GEOPOSITION_URI
 } from "../shared/accWeatherApi";
 
 import {
@@ -17,9 +18,13 @@ import {
 } from "./types";
 
 
-
-export function getCurrentLocation() {
-    const location = {};
+//http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=yIS7IdPp0gk2fQ4NU5fRmpEjBZoJvzKR&q=32.085300%2C34.781769&toplevel=true
+export function  currentGeopostion() {
+    
+    const location = {
+        latitude: 0,
+        longitude: 0
+    };
     if (!navigator.geolocation) {
         console.log("Geolocation is'nt support in your browser");
     } else {
@@ -28,16 +33,63 @@ export function getCurrentLocation() {
             location.latitude = position.coords.latitude;
             location.longitude = position.coords.longitude;
 
+
         })
+        return {
+            type: GET_CURRENT_LOCATION,
+            data: {
+                location
+            }
+        }
     }
 
-    return {
-        type: GET_CURRENT_LOCATION,
-        location: location
-    }
 
 }
 
+//http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=yIS7IdPp0gk2fQ4NU5fRmpEjBZoJvzKR&q=32.085300%2C34.781769&toplevel=true
+
+// export function currentGeopostion() {
+//     const location = {
+//         latitude: 0,
+//         longitude: 0
+//     };
+//     if (!navigator.geolocation) {
+//         console.log("Geolocation is'nt support in your browser");
+//     } else {
+//         navigator.geolocation.getCurrentPosition((position) => {
+//             location.latitude = position.coords.latitude;
+//             location.longitude = position.coords.longitude;
+//         })
+//         console.log("location is >>>>", location);
+//     }
+//     return dispatch => {
+//         console.log("location is >>>>", location);
+//         dispatch(getCurrentLocation(location.latitude, location.longitude));
+//     }
+
+//}
+
+function getCurrentLocation(latitude, longitude) {
+
+    return async dispatch => {
+
+        console.log("location  getCurrentLocation >>>>", latitude, longitude);
+        try {
+            const response = await fetch(CURRENT_LOCATION_GEOPOSITION_URI +
+                "?apikey=" + API_KEY + "&q=" + latitude + "C" + longitude + "&toplevel=true");
+            // const response = await fetch("http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=yIS7IdPp0gk2fQ4NU5fRmpEjBZoJvzKR&q=32.085300%2C34.781769&toplevel=true")
+            const jsonData = await response.json();
+            dispatch({
+                type: GET_CURRENT_LOCATION,
+                data: jsonData
+            })
+
+        } catch (err) {
+            console.log("error in loading data >> ", err.type);
+        }
+    }
+
+}
 
 
 

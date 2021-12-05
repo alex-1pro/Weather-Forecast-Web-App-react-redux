@@ -19,7 +19,7 @@ function WeatherSingleCard({ weather,unitDegrees }) {
 
     useEffect(() => {
         const date = new Date();
-        if (date.getHours() >= 17){
+        if ((date.getHours() >= 17)||(date.getHours()<=5) ){
             setIsDay("weatherNight");
         }
 
@@ -31,6 +31,11 @@ function WeatherSingleCard({ weather,unitDegrees }) {
             return `${accuWeatherIcons}${iconId}-s.png`;
     }
     
+    const weatherText = () => {
+        const text = weather[isDay].IconPhrase;
+        return text.replace("w/",'');
+    }
+
     const getDate = () => {
         const day = new Date(date);
         return day.toDateString();
@@ -48,8 +53,11 @@ function WeatherSingleCard({ weather,unitDegrees }) {
                             </h1>
                              <div className="container-weather-img">
                                 <img className="single-weather-img" src={icon()} />
-                          </div> 
+                            </div> 
                             {temperature()}
+                            <h1>
+                            {weatherText()}
+                            </h1>
                         </div>
                     </Col>
                 </Row>

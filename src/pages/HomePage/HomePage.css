@@ -5,11 +5,16 @@ div.p-home{
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: white;
+    /* position: relative; */
 }
 
 div.p-home div.location-btn{
     cursor: pointer;
     display: inline;
+    /* margin: 0 5px; */
+   /* position: absolute; */
+   
+   
 }
 
 div.p-home div.frame-input{
@@ -18,6 +23,9 @@ div.p-home div.frame-input{
     height: 45px;
     background-color: #F5F5F5;
     margin:10px;
+
+
+
 }
 
 div.p-home input.search-input{

@@ -4,7 +4,7 @@ import './HomePage.css'
 import { GoLocation } from 'react-icons/go'
 import MainCardComponent from '../../components/MainCardComponent/MainCardComponent';
 import WeatherSingleCard from '../../components/WeatherSingleCard/WeatherSingleCard';
-import { inputText, getCurrentLocation, autoComplete, dailyForecasts } from '../../redux/actions';
+import {  currentGeopostion, autoComplete, dailyForecasts } from '../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -15,7 +15,7 @@ function HomePage(props) {
 
     const [textCity, setTextCity] = useState("");
 
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
     const city = useSelector(state => {
         // console.log("state >>>>", state);
         const { homePageReducer } = state;
@@ -23,12 +23,7 @@ function HomePage(props) {
     });
 
 
-    const currentLocation = useSelector(state => {
-        console.log("state >>>>", state);
-        const { homePageReducer } = state;
-
-        return homePageReducer.location;
-    });
+    
     // console.log("currentLocation>>>>>", currentLocation);
 
     // const {dailyWeather} = useSelector(state => {
@@ -52,13 +47,13 @@ function HomePage(props) {
     // });
 
     const handleGetLocation = () => {
-        dispath(getCurrentLocation());
+        dispatch(currentGeopostion());
     }
 
 
     const handleChange = (e) => {
         // console.log("handle text >>", e.target.value);
-        // dispath(inputText(e.target.value));
+        // dispatch(inputText(e.target.value));
         setTextCity(e.target.value);
     }
 
@@ -67,31 +62,33 @@ function HomePage(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispath(inputText(textCity));
-        dispath(autoComplete(textCity))
+        // dispatch(inputText(textCity));
+        dispatch(autoComplete(textCity))
         setTextCity("");
     }
 
     useEffect(() => {
-        dispath(dailyForecasts(city.cityKey))
+        dispatch(dailyForecasts(city.cityKey))
     }, [city.cityKey])
 
     return (
         <div className="p-home">
             <Container fluid>
+            {/* <Row className="justify-content-center" > */}
                 <Row className="justify-content-center" >
                     <Col md="auto">
                         <form onSubmit={handleSubmit}>
                             <div className="frame-input">
                                 <input className="search-input" type="text" placeholder="The city name" onChange={handleChange} value={textCity} />
+
                             </div>
                             {/* <h1>{`latitude = ${currentLocation.latitude} longitude = ${currentLocation.longitude}`}</h1> */}
                             <input type="submit" hidden />
                         </form>
                     </Col>
-                    <Col md="auto">
+                    {/* <Col md="auto">
                         <div className="location-btn"><GoLocation color="#F05514" onClick={handleGetLocation} /></div>
-                    </Col>
+                    </Col> */}
                 </Row>
                 <Row >
                     <MainCardComponent city={city.text} />

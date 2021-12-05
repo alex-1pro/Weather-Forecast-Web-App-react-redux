@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 // import { Redirect } from 'react-router';
 import { weatherFromFavorites } from '../../redux/actions'
-
+import { useHistory } from "react-router-dom";
 
 function CityWeatherCard({ cityData }) {
     /**
@@ -19,11 +19,12 @@ function CityWeatherCard({ cityData }) {
     //weatherFromFavorites(city, cityKey, currentWeather, dailyWeather)
     const dispatch = useDispatch();
     const { currentWeather, dailyWeather, city, cityKey } = cityData;
+    const history = useHistory();
 
     const clickOnCard = () => {
         dispatch(weatherFromFavorites(city, cityKey, currentWeather, dailyWeather));
-       //return <Redirect to="/"/>
-        window.location.href="#/"
+        // window.location.href="#/"
+        history.push("/#")
     }
 
     const icon = () => {
@@ -40,7 +41,7 @@ function CityWeatherCard({ cityData }) {
             <Row >
                 <Col >
                     <div className="single-day-container">
-                        <h1>
+                        <h1 className="city-color">
                             {city}
                         </h1>
                         <div className="container-weather-img">
